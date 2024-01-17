@@ -1,14 +1,23 @@
 /**
- * 1ºCrear una versión del programa realizado en la tarea ¿Dónde está R2D2?, pero ORIENTADO A OBJETOS.
- * 2ºLa clase Robot debe tener 4 propiedades: nombre, posX, posY y dir. También tendrá un comportamiento por medio de 3 métodos: mover(), mostrarPosicion() y obtenerDireccion().
+ * 1ºCrear una versión del programa ¿Dónde está R2D2?, pero ORIENTADO A OBJETOS.
+ *
+ * 2ºLa clase Robot debe tener 4 propiedades: nombre, posX, posY y direccion. También tendrá un comportamiento por medio de 3 métodos: mover(), mostrarPosicion() y obtenerDireccion().
+ *
  * 3ºEl método mover() debe recibir un array de elementos enteros y no retornará nada, ya que los cambios quedarán almacenados en las propiedades del mismo.
- * 4ºEl método obtenerDireccion() no recibe parámetros y retorna una cadena de caracteres con la dirección PositiveX, NegativeX, PositiveY o NegativeY.
- * 5ºEl método mostrarPosicion() debe mostrar por consola la posición y dirección. Ejemplo: "R2D2 está en (10, -5) PositiveX"
- * 6ºUn objeto de la clase Robot debe inicializarse siempre en la posición (0, 0) y la dirección eje Y positivo (hacia arriba) cuando se instancia.
+ *
+ * 4ºEl método obtenerDireccion() no recibe parámetros y retorna una cadena de caracteres con la dirección PositiveX, NegativeX, PositiveY o NegativeY. (Posible mejora con class enum https://kotlinlang.org/docs/enum-classes.html)
+ *
+ * 5ºEl método mostrarPosicion() debe mostrar por consola la posición y dirección. Ejemplo: R2D2 está en (10, -5) PositiveX.
+ *
+ * 6ºUn objeto de la clase Robot debe inicializarse siempre en la posición (0, 0) y la dirección eje Y positivo (hacia arriba) cuando se instancia. En esta versión ya no va a moverse siempre desde la posición (0,0), sino que lo hará desde la última posición y dirección dónde se quedó al realizar su último movimiento.
+ *
  * 7ºEn este programa, vamos a realizar los mismos movimientos, pero el robot comenzará cada movimiento en la posición final después de realizar el movimiento anterior.
- * 8ºEn el main debes crear un objeto de Robot (o una variable de tipo Robot) con el nombre "R2D2". El nombre de la variable que utilices para crearlo puede ser robot1.
- * 9ºCread los movimientos en un array de arrays y recorrerlos para realizar en cada iteración los movimientos del robot y mostrar la posición del mismo al finalizar cada uno. En cada iteración del bucle llamaremos a los métodos mover() y mostrarPosicion().
- * 10ºUn ejemplo de una estructura que podéis utilizar para los movimientos sería la siguiente:
+ *
+ * 8ºEn el main debes crear un objeto de Robot (o una variable de tipo Robot) con el nombre R2D2. El nombre de la variable que utilices para crearlo puede ser robot1.
+ *
+ * 9ºLa clase Robot debe obligar a introducir un nombre que no esté vacío.
+ *
+ * 10ºCread los movimientos en un array de arrays y recorrerlos para realizar en cada iteración los movimientos del robot y mostrar la posición del mismo al finalizar cada uno. En cada iteración del bucle llamaremos a los métodos mover() y mostrarPosicion().
  * [
  *     [1, -5, 0, -9],
  *     [3, 3, 5, 6, 1, 0, 0, -7],
@@ -46,17 +55,18 @@ class Robot(private val nombre:String ){
             if (this.dir == 3) this.dir = 0 else this.dir++
         }
     }
-
+    //Enumeracion de las direcciónes
+    enum class direc {POSITIVEY,NEGATIVEX,NEGATIVEY,POSITIVEX}
     /**
      * Método para obtener la dirección del robot.
      *
      * @return Una cadena de caracteres que representa la dirección del robot.
      */
     private fun obtenerDireccion() = when (this.dir){
-        0 -> "POSITIVEY"
-        1 -> "NEGATIVEX"
-        2 -> "NEGATIVEY"
-        3 -> "POSITIVEX"
+        0 -> direc.POSITIVEY
+        1 -> direc.NEGATIVEX
+        2 -> direc.NEGATIVEY
+        3 -> direc.POSITIVEX
         else -> {""}
     }
 
